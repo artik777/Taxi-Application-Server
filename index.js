@@ -33,8 +33,11 @@ app.use(express.json());
 
 //Import Routes
 const userRoutes = require("./routes/user.js");
+const commentRoutes = require("./routes/comment.js");
 
 //Route Middlewares
 app.use("/api", userRoutes);
+app.use("/api", commentRoutes);
+
 
 app.listen(process.env.PORT || 5000);
