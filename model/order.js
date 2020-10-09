@@ -5,13 +5,13 @@ const orderSchema = new mongoose.Schema({
     type: String,
     required: true,
     min: 2,
-    max: 20,
+    max: 40,
   },
   surname: {
     type: String,
     required: true,
     min: 2,
-    max: 20,
+    max: 40,
   },
   category: {
     type: String,
@@ -45,16 +45,20 @@ const orderSchema = new mongoose.Schema({
   pickupAddress: {
     type: String,
     required: true,
-    min: 10,
+    min: 5,
     max: 50,
   },
   destinationAddress: {
     type: String,
     required: true,
-    min: 10,
+    min: 5,
     max: 50,
   },
   time: {
+    type: String,
+    required: true,
+  },
+  timearrived: {
     type: String,
     required: true,
   },
@@ -72,8 +76,8 @@ const orderSchema = new mongoose.Schema({
     required: true,
   },
   timestamp: {
-    type: Date,
-    default: Date.now,
+    type: String,
+    required: true,
   },
   status: {
     type: String,

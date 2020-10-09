@@ -19,8 +19,8 @@ router.get("/orders/:id", getOrder, (req, res) => {
 });
 
 const schema = Joi.object({
-  name: Joi.string().min(2).max(20).required(),
-  surname: Joi.string().min(2).max(20).required(),
+  name: Joi.string().min(2).max(40).required(),
+  surname: Joi.string().min(2).max(40).required(),
   category: Joi.string().required(),
   carModel: Joi.string().required(),
   orderQuantity: Joi.number().required(),
@@ -28,17 +28,18 @@ const schema = Joi.object({
   timespent: Joi.number().required(),
   ordernr: Joi.string().required(),
   phone: Joi.string().min(9).max(12).required(),
-  pickupAddress: Joi.string().min(10).max(50).required(),
-  destinationAddress: Joi.string().min(10).max(50).required(),
+  pickupAddress: Joi.string().min(5).max(50).required(),
+  destinationAddress: Joi.string().min(5).max(50).required(),
   time: Joi.string().required(),
+  timearrived: Joi.string().required(),
   date: Joi.string().required(),
   email: Joi.string().max(50).required().email(),
   computer: Joi.string().required(),
-  timestamp: Joi.date().timestamp(),
+  timestamp: Joi.string().required(),
   status: Joi.string().required(),
 });
 
-//post order
+//post to order
 router.post("/orders", verify, async (req, res, next) => {
   const { error } = schema.validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
@@ -55,6 +56,7 @@ router.post("/orders", verify, async (req, res, next) => {
     pickupAddress: req.body.pickupAddress,
     destinationAddress: req.body.destinationAddress,
     time: req.body.time,
+    timearrived: req.body.timearrived,
     date: req.body.date,
     email: req.body.email,
     computer: req.body.computer,
@@ -71,7 +73,7 @@ router.post("/orders", verify, async (req, res, next) => {
 
 //update one order
 router.patch("/orders/:id", getOrder, async (req, res) => {
-  res.order.timespent = req.body.timespent;
+  res.order.timearrived = req.body.timearrived;
   if (req.body.status != null) {
     res.order.status = req.body.status;
   }

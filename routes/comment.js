@@ -21,7 +21,7 @@ router.get("/comments/:id", getComment, (req, res) => {
 const schema = Joi.object({
   name: Joi.string().min(2).max(20).required(),
   comment: Joi.string().min(5).max(500).required(),
-  timestamp: Joi.date().timestamp(),
+  timestamp: Joi.string().required(),
 });
 //post comment
 router.post("/comments", async (req, res, next) => {
@@ -40,7 +40,7 @@ router.post("/comments", async (req, res, next) => {
   }
 });
 //delele one comment
-router.delete("/comment/:id", getComment, async (req, res) => {
+router.delete("/comments/:id", getComment, async (req, res) => {
   try {
     await res.comment.remove();
     res.status(200).json({ message: "Comment deleted" });
